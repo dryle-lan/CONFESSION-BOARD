@@ -22,4 +22,4 @@ preview_id = "70c2a31fa2524276b2dd7dd5ce96983f"     # replace after: wrangler kv
 
 # ── Environment Variables ──────────────────────────────────────────────────────
 [vars]
-ALLOWED_ORIGIN = "https://confessional-api.lanticsechristiandryle.workers.dev"  # replace with your Pages URL
+ALLOWED_ORIGIN = "https://confessional-api.lanticsechristiandryle.pages.dev"  # replace with your Pages URL
