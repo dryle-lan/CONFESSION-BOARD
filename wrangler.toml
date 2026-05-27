@@ -1,7 +1,6 @@
-# wrangler.toml
-name = 'confessional-api'
-main       = "index.js"
-compatibility_date = "2026-05-27"
+name       = "confessional-api"
+main       = "worker/index.js"
+compatibility_date = "2024-09-23"
 
 # ── Pages ──────────────────────────────────────────────────────────────────────
 # Static assets are served from /public via Cloudflare Pages.
@@ -12,14 +11,19 @@ compatibility_date = "2026-05-27"
 [[d1_databases]]
 binding      = "DB"
 database_name = "confessional-db"
-database_id  = "22980ec2-fe0b-4135-a0e8-b3bf1bfdb37c"
+database_id  = "YOUR_D1_DATABASE_ID"   # replace after: wrangler d1 create confessional-db
 
 # ── KV Namespace (rate limiting) ───────────────────────────────────────────────
 [[kv_namespaces]]
 binding    = "RATELIMIT"
-id         = "0fbb936ba9f54bc985b30883111dbc75"    # replace after: wrangler kv:namespace create RATELIMIT
-preview_id = "70c2a31fa2524276b2dd7dd5ce96983f"     # replace after: wrangler kv:namespace create RATELIMIT --preview
+id         = "YOUR_KV_NAMESPACE_ID"    # replace after: wrangler kv:namespace create RATELIMIT
+preview_id = "YOUR_KV_PREVIEW_ID"     # replace after: wrangler kv:namespace create RATELIMIT --preview
 
 # ── Environment Variables ──────────────────────────────────────────────────────
 [vars]
-ALLOWED_ORIGIN = "https://confessional-api.lanticsechristiandryle.pages.dev"  # replace with your Pages URL
+ALLOWED_ORIGIN = "https://YOUR_PAGES_DOMAIN.pages.dev"  # replace with your Pages URL
+
+# ── Routes ─────────────────────────────────────────────────────────────────────
+[[routes]]
+pattern = "YOUR_PAGES_DOMAIN.pages.dev/api/*"
+zone_name = ""   # leave blank for pages.dev subdomains
