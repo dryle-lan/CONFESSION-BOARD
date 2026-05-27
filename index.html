@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CONFESSIONAL</title>
+  <meta name="description" content="Speak freely. Stay hidden. Anonymous confessions." />
+  <meta name="theme-color" content="#0a0e1a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Noise overlay ───────────────────────────────────────────── -->
+  <div class="noise" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <!-- ── Header ──────────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-bracket">[</span>
+        <span class="logo-text">CONFESSIONAL</span>
+        <span class="logo-bracket">]</span>
+        <span class="logo-cursor" aria-hidden="true"></span>
+      </div>
+      <p class="tagline">speak freely. stay hidden.</p>
+    </div>
+  </header>
+
+  <!-- ── Main ────────────────────────────────────────────────────── -->
+  <main class="main-content">
+
+    <!-- Confess Panel -->
+    <section class="confess-section" aria-label="Submit a confession">
+      <button class="confess-toggle" id="confessToggle" aria-expanded="false" aria-controls="confessForm">
+        <span class="toggle-icon" aria-hidden="true">+</span>
+        <span class="toggle-label">NEW CONFESSION</span>
+        <span class="toggle-hint">anonymous · untracked · ephemeral</span>
+      </button>
+
+      <div class="confess-form-wrapper" id="confessForm" hidden>
+        <form id="confessionForm" novalidate>
+          <div class="field-group">
+            <label class="field-label" for="confTitle">
+              TITLE
+              <span class="char-counter" id="titleCounter">0 / 100</span>
+            </label>
+            <input
+              class="field-input"
+              type="text"
+              id="confTitle"
+              name="title"
+              placeholder="give it a name..."
+              maxlength="100"
+              autocomplete="off"
+              spellcheck="false"
+              required
+            />
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="confBody">
+              CONFESSION
+              <span class="char-counter" id="bodyCounter">0 / 1000</span>
+            </label>
+            <textarea
+              class="field-input field-textarea"
+              id="confBody"
+              name="body"
+              placeholder="what do you need to get off your chest..."
+              maxlength="1000"
+              rows="5"
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-footer">
+            <p class="anon-notice" aria-live="polite">
+              <span class="notice-dot" aria-hidden="true"></span>
+              your identity is never stored
+            </p>
+            <button class="submit-btn" type="submit" id="submitBtn">
+              <span class="btn-text">CONFESS ANONYMOUSLY</span>
+              <span class="btn-loading" aria-hidden="true">TRANSMITTING...</span>
+            </button>
+          </div>
+
+          <div class="form-message" id="formMessage" role="alert" aria-live="assertive"></div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Feed Controls -->
+    <div class="feed-controls">
+      <div class="sort-tabs" role="tablist" aria-label="Sort confessions">
+        <button
+          class="sort-tab active"
+          id="tab-newest"
+          role="tab"
+          aria-selected="true"
+          data-sort="newest"
+        >NEWEST</button>
+        <button
+          class="sort-tab"
+          id="tab-popular"
+          role="tab"
+          aria-selected="false"
+          data-sort="popular"
+        >POPULAR</button>
+      </div>
+      <span class="feed-count" id="feedCount" aria-live="polite"></span>
+    </div>
+
+    <!-- Feed -->
+    <section class="feed" id="feed" aria-label="Confession feed" aria-live="polite">
+      <div class="feed-loading" id="feedLoading" aria-label="Loading confessions">
+        <span class="loading-dot"></span>
+        <span class="loading-dot"></span>
+        <span class="loading-dot"></span>
+      </div>
+      <div class="feed-empty" id="feedEmpty" hidden>
+        <p class="empty-text">// no confessions yet</p>
+        <p class="empty-sub">be the first to confess</p>
+      </div>
+      <div class="confession-list" id="confessionList"></div>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ──────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <p class="footer-text">Anonymous.&nbsp;&nbsp;Unfiltered.&nbsp;&nbsp;Ephemeral.</p>
+  </footer>
+
+  <!-- ── Confession Card Template ────────────────────────────────── -->
+  <template id="confessionTemplate">
+    <article class="confession-card" aria-label="Confession">
+      <div class="card-header">
+        <h2 class="card-title"></h2>
+        <time class="card-time" datetime=""></time>
+      </div>
+      <p class="card-body"></p>
+      <div class="card-footer">
+        <div class="vote-group" role="group" aria-label="Vote">
+          <button class="vote-btn upvote" aria-label="Upvote" data-type="up">
+            <span class="vote-icon" aria-hidden="true">▲</span>
+            <span class="vote-count upvote-count">0</span>
+          </button>
+          <span class="vote-score" aria-label="Score"></span>
+          <button class="vote-btn downvote" aria-label="Downvote" data-type="down">
+            <span class="vote-count downvote-count">0</span>
+            <span class="vote-icon" aria-hidden="true">▼</span>
+          </button>
+        </div>
+        <span class="card-id" aria-hidden="true"></span>
+      </div>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
