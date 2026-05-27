@@ -1,7 +1,7 @@
 # wrangler.toml
 name = 'confessional-api'
 main       = "index.js"
-compatibility_date = "2024-09-23"
+compatibility_date = "2026-05-27"
 
 # ── Pages ──────────────────────────────────────────────────────────────────────
 # Static assets are served from /public via Cloudflare Pages.
@@ -23,8 +23,3 @@ preview_id = "70c2a31fa2524276b2dd7dd5ce96983f"     # replace after: wrangler kv
 # ── Environment Variables ──────────────────────────────────────────────────────
 [vars]
 ALLOWED_ORIGIN = "https://confessional-api.lanticsechristiandryle.workers.dev"  # replace with your Pages URL
-
-# ── Routes ─────────────────────────────────────────────────────────────────────
-[[routes]]
-pattern = "confessional-api.lanticsechristiandryle.workers.dev/api/*"
-zone_name = ""   # leave blank for pages.dev subdomains
